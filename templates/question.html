@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>main page</title>
+    <title>question</title>
 
 
     <!-- Bootstrap core CSS -->
@@ -17,9 +17,7 @@
 <body>
 
 
-
-
-
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
     <a class="navbar-brand" href="#">Smirnoff Ask</a>
@@ -56,31 +54,24 @@
       </nav>
     </nav>
 
-
-
-
   </nav>
 
 
 
 
+  <!-- Page content -->
   <div class = "conainer container-fluid">
-
-
 
   <div class="row mb-2">
       <div class="col-md-9">
 
-        <div class = "container themen-container">
-          <h2 class="mb-4">New questions</h2>
-        </div>
 
 
         <div class = "container themen-container">
-          <div class="row no-gutters border border-secondary rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
             <div class="p-4 col-auto d-none d-lg-block text-center">
               <center class="media">
-                <a href = "#"><img class="mr-0 mb-2 rounded-circle" src="../static/img/1.jpg" alt="" width="48" height="48"></a>
+                <a href = "#"><img class="mr-0 mb-2 rounded-circle" src="../static/img/1.jpg" alt="" width="64" height="64"></a>
               </center>
               <center><span class="badge badge-pill badge-light">123</span></center>
               <center>
@@ -89,25 +80,25 @@
               </center>
             </div>
             <div class="col p-4 d-flex align-items-start flex-column position-static">
-              <a href = "#"><h3 class="mb-0">How to create a Technopark project?</h3></a>
+              <a href = "#"><h3 class="mb-2">How to create a Technopark project?</h3></a>
               <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
               <div class = "mt-2">
-                <a href="#" class="link mr-4">Ansvers (3)</a>
                 <span class = "mr-2">Tags: </span>
                 <a href="#"><span class="badge badge-success">cherry</span></a>
                 <a href="#"><span class="badge badge-success">pineapple</span></a>
                 <a href="#"><span class="badge badge-success">strawberry</span></a>
-              </div>
+             </div>
             </div>
           </div>
         </div>
 
+        <div class = "container themen-container border-bottom mb-4"></div>
 
         <div class = "container themen-container">
-          <div class="row no-gutters border border-secondary rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="row no-gutters border border-secondary rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
             <div class="p-4 col-auto d-none d-lg-block text-center">
               <center class="media">
-                <a href = "#"><img class="mr-0 mb-2 rounded-circle" src="../static/img/1.jpg" alt="" width="48" height="48"></a>
+                <a href = "#"><img class="ml-2 mr-2 mb-2 rounded-circle" src="../static/img/1.jpg" alt="" width="48" height="48"></a>
               </center>
               <center><span class="badge badge-pill badge-light">123</span></center>
               <center>
@@ -116,21 +107,51 @@
               </center>
             </div>
             <div class="col p-4 d-flex align-items-start flex-column position-static">
-              <a href = "#"><h3 class="mb-0">How to create a Technopark project?</h3></a>
               <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <div class = "mt-2">
-                <a href="#" class="link mr-4">Ansvers (3)</a>
-                <span class = "mr-2">Tags: </span>
-                <a href="#"><span class="badge badge-success">cherry</span></a>
-                <a href="#"><span class="badge badge-success">pineapple</span></a>
-                <a href="#"><span class="badge badge-success">strawberry</span></a>
+              <div class="form-check mt-2">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Correct!</label>
               </div>
             </div>
           </div>
         </div>
 
 
+        <div class = "container themen-container">
+          <div class="row no-gutters border border-secondary rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
+            <div class="p-4 col-auto d-none d-lg-block text-center">
+              <center class="media">
+                <a href = "#"><img class="ml-2 mr-2 mb-2 rounded-circle" src="../static/img/1.jpg" alt="" width="48" height="48"></a>
+              </center>
+              <center><span class="badge badge-pill badge-light">123</span></center>
+              <center>
+                <a href = "#"><span class="badge badge-pill badge-success">+</span></a>
+                <a href = "#"><span class="badge badge-pill badge-danger">-</span></a>
+              </center>
+            </div>
+            <div class="col p-4 d-flex align-items-start flex-column position-static">
+              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+              <div class="form-check mt-2">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Correct!</label>
+              </div>
+            </div>
+          </div>
+        </div>
 
+
+        <div class = "container themen-container border-bottom mb-4"></div>
+
+        <div class = "container themen-container mb-4">
+          <form>
+            <div class="form-group">
+              <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Enter your answer here" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Answer</button>
+          </form>
+        </div>
+
+        <!-- Paginator -->
         <div class = "container themen-container">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -151,10 +172,12 @@
           </nav>
         </div>
 
-   </div>
+
+       </div>
+
+
 
       <div class="col-md-3">
-
 
         <div class = "container mb-4">
           <h2>Best members </h2>
