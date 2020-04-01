@@ -9,9 +9,7 @@
 {% block page_content %}
 
   <div class = "container themen-container mb-4">
-    <span class="h2 mr-4">New questions</span>
-    <span class="h4 mr-4"><a class = "link" href = "{% url 'blog.hot' %}">Hot questions</a></span>
-    <span class="h4 mr-4"><a class = "link" href = "{% url 'blog.ask' %}">Ask</a></span>
+    <span class="h2 mr-4">Hot questions</span>
   </div>
 
   {% include "question_box.html" %}

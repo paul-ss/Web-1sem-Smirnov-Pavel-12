@@ -1,0 +1,30 @@
+{% load static %}
+
+{% for question_box in question_box_list %}
+  <div class = "container themen-container">
+    <div class="row no-gutters border border-secondary rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="p-4 col-auto d-none d-lg-block text-center">
+        <center class="media">
+          <!--{{ question_box.img_path }}-->
+          <a href = "#"><img class="mr-0 mb-2 rounded-circle" src="{% static 'img/1.jpg' %}" alt="" width="48" height="48"></a>
+        </center>
+        <center><span class="badge badge-pill badge-light">{{ question_box.rating }}</span></center>
+        <center>
+          <a href = "#"><span class="badge badge-pill badge-success">+</span></a>
+          <a href = "#"><span class="badge badge-pill badge-danger">-</span></a>
+        </center>
+      </div>
+      <div class="col p-4 d-flex align-items-start flex-column position-static">
+        <a href = "{% url 'blog.question' question_box.id %}"><h3 class="mb-0">{{ question_box.question }}</h3></a>
+        <p class="card-text mb-auto">{{ question_box.description }}</p>
+        <div class = "mt-2">
+          <a href="{% url 'blog.question' question_box.id %}" class="link mr-4">Ansvers ({{ question_box.answers_count }})</a>
+          <span class = "mr-2">Tags: </span>
+          {% for tag in question_box.tags %}
+            <a href="{% url 'blog.tag' tag %}"><span class="badge badge-success">{{ tag }}</span></a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}

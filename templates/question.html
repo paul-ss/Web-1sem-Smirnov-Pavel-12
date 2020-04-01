@@ -1,212 +1,27 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>question</title>
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  {{ tittle }}
+{% endblock %}
 
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
-
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="../static/css/navbar.css">
-    <!--link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet"-->
-
-</head>
-
-<body>
+{% block page_content %}
 
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  {% include "single_question.html" %}
+  {% include "answer_box.html" %}
 
-    <a class="navbar-brand" href="#">Smirnoff Ask</a>
+    <div class = "container themen-container border-bottom mb-4"></div>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse"  aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse justify-content-md-center">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-
-          <form class="form-inline">
-            <input class="form-control mr-md-2 " type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ask!</button>
-          </form>
-
-        </li>
-
-      </ul>
-    </div>
-
-    <div class="media">
-      <a href = "#"><img class="mr-3 rounded-circle" src="../static/img/1.jpg" alt="" width="48" height="48"></a>
+    <div class = "container themen-container mb-4">
+      <form>
+        <div class="form-group">
+          <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Enter your answer here" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary col-md-2">Answer</button>
+      </form>
     </div>
 
 
-
-    <nav class="nav flex-column">
-      <a class="active text-white" href="#"> <strong> Snup Dog </strong> </a>
-      <nav class="nav">
-        <a class="active pr-2 text-white" href="#">Logout</a>
-        <a class="active pr-2 text-white" href="#">Settings</a>
-      </nav>
-    </nav>
-
-  </nav>
-
-
-
-
-  <!-- Page content -->
-  <div class = "conainer container-fluid">
-
-  <div class="row mb-2">
-      <div class="col-md-9">
-
-
-
-        <div class = "container themen-container">
-          <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-            <div class="p-4 col-auto d-none d-lg-block text-center">
-              <center class="media">
-                <a href = "#"><img class="mr-0 mb-2 rounded-circle" src="../static/img/1.jpg" alt="" width="64" height="64"></a>
-              </center>
-              <center><span class="badge badge-pill badge-light">123</span></center>
-              <center>
-                <a href = "#"><span class="badge badge-pill badge-success">+</span></a>
-                <a href = "#"><span class="badge badge-pill badge-danger">-</span></a>
-              </center>
-            </div>
-            <div class="col p-4 d-flex align-items-start flex-column position-static">
-              <a href = "#"><h3 class="mb-2">How to create a Technopark project?</h3></a>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <div class = "mt-2">
-                <span class = "mr-2">Tags: </span>
-                <a href="#"><span class="badge badge-success">cherry</span></a>
-                <a href="#"><span class="badge badge-success">pineapple</span></a>
-                <a href="#"><span class="badge badge-success">strawberry</span></a>
-             </div>
-            </div>
-          </div>
-        </div>
-
-        <div class = "container themen-container border-bottom mb-4"></div>
-
-        <div class = "container themen-container">
-          <div class="row no-gutters border border-secondary rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
-            <div class="p-4 col-auto d-none d-lg-block text-center">
-              <center class="media">
-                <a href = "#"><img class="ml-2 mr-2 mb-2 rounded-circle" src="../static/img/1.jpg" alt="" width="48" height="48"></a>
-              </center>
-              <center><span class="badge badge-pill badge-light">123</span></center>
-              <center>
-                <a href = "#"><span class="badge badge-pill badge-success">+</span></a>
-                <a href = "#"><span class="badge badge-pill badge-danger">-</span></a>
-              </center>
-            </div>
-            <div class="col p-4 d-flex align-items-start flex-column position-static">
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <div class="form-check mt-2">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Correct!</label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class = "container themen-container">
-          <div class="row no-gutters border border-secondary rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
-            <div class="p-4 col-auto d-none d-lg-block text-center">
-              <center class="media">
-                <a href = "#"><img class="ml-2 mr-2 mb-2 rounded-circle" src="../static/img/1.jpg" alt="" width="48" height="48"></a>
-              </center>
-              <center><span class="badge badge-pill badge-light">123</span></center>
-              <center>
-                <a href = "#"><span class="badge badge-pill badge-success">+</span></a>
-                <a href = "#"><span class="badge badge-pill badge-danger">-</span></a>
-              </center>
-            </div>
-            <div class="col p-4 d-flex align-items-start flex-column position-static">
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <div class="form-check mt-2">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Correct!</label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class = "container themen-container border-bottom mb-4"></div>
-
-        <div class = "container themen-container mb-4">
-          <form>
-            <div class="form-group">
-              <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Enter your answer here" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Answer</button>
-          </form>
-        </div>
-
-        <!-- Paginator -->
-        <div class = "container themen-container">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-
-       </div>
-
-
-
-      <div class="col-md-3">
-
-        <div class = "container mb-4">
-          <h2>Best members </h2>
-
-          <ul class="list-group">
-            <li class="list-group-item"><a class = "text-dark" href = "#">Cras justo odio</a></li>
-            <li class="list-group-item"><a class = "text-dark" href = "#">Dapibus ac facilisis in</a></li>
-            <li class="list-group-item"><a class = "text-dark" href = "#">Morbi leo risus</a></li>
-            <li class="list-group-item"><a class = "text-dark" href = "#">Porta ac consectetur ac</a></li>
-            <li class="list-group-item"><a class = "text-dark" href = "#">Vestibulum at eros</a></li>
-          </ul>
-        </div>
-
-        <div class = "container mb-4">
-
-          <h2>Popular tags</h2>
-          <a href="#"><span class="badge badge-success">cherry</span></a>
-          <a href="#"><span class="badge badge-success">pineapple</span></a>
-          <a href="#"><span class="badge badge-success">strawberry</span></a>
-          <a href="#"><span class="badge badge-success">apple</span></a>
-          <a href="#"><span class="badge badge-success">blueberry</span></a>
-          <a href="#"><span class="badge badge-success">cranberry</span></a>
-          <a href="#"><span class="badge badge-success">banana</span></a>
-
-        </div>
-
-      </div>
-    </div>
-
-</div>
-</body>
-</html>
+{% endblock %}

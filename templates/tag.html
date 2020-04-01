@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  {{ tittle }}
+{% endblock %}
+
+
+{% block page_content %}
+
+  <div class = "container themen-container mb-4">
+    <span class="h2 mr-4">Tag search: {{ tag }}</span>
+  </div>
+
+  {% if question_box_list %}
+    {% include "question_box.html" %}
+    {% include "paginator.html" %}
+  {% else %}
+    <div class = "container themen-container mb-4">
+      <p class="h5 mr-4 text-danger">Sorry, results not found!</p>
+    </div>
+  {% endif %}
+
+{% endblock %}
