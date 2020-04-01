@@ -7,7 +7,7 @@ from django.shortcuts import render_to_response  #optional
 from django.http import HttpResponse
 import random
 from django.core.urlresolvers import reverse
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
 
 
 
