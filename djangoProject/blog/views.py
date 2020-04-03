@@ -9,7 +9,7 @@ import random
 from django.core.urlresolvers import reverse
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
 
-
+from blog.models import *
 
 
 def paginate(objects_list, request, per_page):
@@ -42,18 +42,8 @@ def hello(request):
 def index(request):
     tittle = "index"
 
-    question_box_list = []
-    for i in range(17):
-        question_box = dict.fromkeys(['question', 'description', 'rating', 'answers_count', 'tags', 'id'])
-        question_box['id'] = random.randint(0,10)
-        question_box['question'] = 'Question' + str(question_box['id'])
-        question_box['description'] = 'Description' + str(question_box['id'])
-        question_box['rating'] = random.randint(0,10)
-        question_box['answers_count'] = str(random.randint(0,10))
-        question_box['tags'] = ['tag' + str(random.randint(0,10)) for i in range(random.randint(1,4))]
-        question_box_list.append(question_box)
-
-        question_list_current_page, page = paginate(question_box_list, request, 5)
+    question_list = Question.objects.new_questions()
+    question_list_current_page, page = paginate(question_list, request, 5)
 
     return render_to_response('index.html', {
         'tittle': tittle,
@@ -66,19 +56,9 @@ def index(request):
 
 def hot(request):
     tittle = 'hot'
-    question_box_list = []
 
-    for i in range(23):
-        question_box = dict.fromkeys(['question', 'description', 'rating', 'answers_count', 'tags', 'id'])
-        question_box['id'] = random.randint(0,10)
-        question_box['question'] = 'Question' + str(question_box['id'])
-        question_box['description'] = 'Description' + str(question_box['id'])
-        question_box['rating'] = random.randint(0,10)
-        question_box['answers_count'] = str(random.randint(0,10))
-        question_box['tags'] = ['tag' + str(random.randint(0,10)) for i in range(random.randint(1,4))]
-        question_box_list.append(question_box)
-
-        question_list_current_page, page = paginate(question_box_list, request, 5)
+    question_list = Question.objects.hot_questions()
+    question_list_current_page, page = paginate(question_list, request, 5)
 
     return render_to_response('hot.html', {
         'tittle': tittle,
@@ -89,25 +69,10 @@ def hot(request):
 
 
 def tag(request, tag = None):
-    if tag == None:
-        tittle = 'none'
-    else :
-        tittle = tag
+    tittle = "tag: " + tag
 
-    question_box_list = []
-
-    for i in range(16):
-        question_box = dict.fromkeys(['question', 'description', 'rating', 'answers_count', 'tags', 'id'])
-        question_box['id'] = random.randint(0,10)
-        question_box['question'] = 'Question' + str(question_box['id'])
-        question_box['description'] = 'Description' + str(question_box['id'])
-        question_box['rating'] = random.randint(0,10)
-        question_box['answers_count'] = str(random.randint(0,10))
-        question_box['tags'] = ['tag' + str(random.randint(0,10)) for i in range(random.randint(1,3))]
-        question_box['tags'].append(tag)
-        question_box_list.append(question_box)
-
-        question_list_current_page, page = paginate(question_box_list, request, 5)
+    question_list = Question.objects.tag_questions(tag)
+    question_list_current_page, page = paginate(question_list, request, 5)
 
     return render_to_response('tag.html', {
         'tag' : tag,
@@ -119,26 +84,10 @@ def tag(request, tag = None):
 
 
 def question(request, id = None):
-    if id == None:
-        tittle = 'none'
-    else :
-        tittle = 'question'
+    tittle = "question: " + id
 
-    question = dict.fromkeys(['question', 'description', 'rating', 'answers_count', 'tags', 'id'])
-    question['question'] = 'Question' + str(id)
-    question['description'] = 'Description' + str(id)
-    question['rating'] = random.randint(0,10)
-    question['answers_count'] = str(random.randint(0,10))
-    question['tags'] = ['tag' + str(random.randint(0,10)) for i in range(random.randint(1,4))]
-    question['id'] = id
-
-    answer_list = []
-    for i in range(5):
-        answer = dict.fromkeys(['answer', 'rating', 'is_correct', 'image'])
-        answer['answer'] = 'My answer for your question' + str(random.randint(0,10))
-        answer['rating'] = random.randint(0,10)
-        answer['is_correct'] = (i == 0)
-        answer_list.append(answer)
+    question = Question.objects.pk_question(id)
+    answer_list = Answer.objects.get_answers(question)
 
     return render_to_response('question.html', {
         'tittle': tittle,

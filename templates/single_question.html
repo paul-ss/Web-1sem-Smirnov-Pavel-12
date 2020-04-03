@@ -12,11 +12,11 @@
       </center>
     </div>
     <div class="col p-4 d-flex align-items-start flex-column position-static">
-      <a href = "#"><h3 class="mb-2">{{ question.question }}</h3></a>
+      <a href = "#"><h3 class="mb-2">{{ question.title }}</h3></a>
       <p class="card-text mb-auto">{{ question.description }}</p>
       <div class = "mt-2">
         <span class = "mr-2">Tags: </span>
-        {% for tag in question.tags %}
+        {% for tag in question.tags.all %}
           <a href="{% url 'blog.tag' tag %}"><span class="badge badge-success">{{ tag }}</span></a>
         {% endfor %}
      </div>
