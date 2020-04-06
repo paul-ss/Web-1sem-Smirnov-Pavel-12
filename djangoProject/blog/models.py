@@ -6,6 +6,8 @@ from datetime import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericRelation
 import pytz
 
 
@@ -13,7 +15,7 @@ import pytz
 
 class QuestionManager(models.Manager):
     def new_questions(self):
-        return self.order_by("creation_date")
+        return self.order_by("-creation_date")
 
 
     def hot_questions(self):
@@ -50,6 +52,8 @@ class AnswerManager(models.Manager):
 
 
 
+
+
 # Models
 
     #on_delete - что делать, если удалили тот объект, на который ссылались
@@ -65,6 +69,7 @@ class Question(models.Model):
     #relations
     tags = models.ManyToManyField('Tag')
     profile = models.ForeignKey('Profile', null=True, on_delete=models.SET_NULL) #??????
+    likes = GenericRelation('Like', related_query_name='questions')
 
     objects = QuestionManager()
 
@@ -81,9 +86,14 @@ class Answer(models.Model):
     rating = models.IntegerField(default = 0)
 
     profile = models.ForeignKey('Profile', null=True, on_delete=models.SET_NULL) #??????
-    question = models.ForeignKey('Question', null=True, on_delete=models.SET_NULL) #??????
+    question = models.ForeignKey('Question', null=True, on_delete=models.CASCADE) #??????
+    likes = GenericRelation('Like', related_query_name='answers')
 
     objects = AnswerManager()
+
+    def __str__(self):
+        return self.description
+
 
 
 class Tag(models.Model):
@@ -96,10 +106,17 @@ class Tag(models.Model):
         return self.name
 
 
+
+
 class Profile(models.Model):
     avatar = models.TextField(default = "")
 
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.user.username
+
 
 
 
@@ -107,7 +124,10 @@ class Like(models.Model):
     like = models.IntegerField(default = 0)
 
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    #content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+
+    content_type = models.ForeignKey(ContentType, null = True, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField(null = True)
+    content_object = GenericForeignKey()
 
     def __str__(self):
         return str(self.like)
