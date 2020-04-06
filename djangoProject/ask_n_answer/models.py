@@ -49,7 +49,25 @@ class AnswerManager(models.Manager):
 
 
 
+class TagManager(models.Manager):
+    def get_popular(self, n_items):
+        return sorted(Tag.objects.all(), key=lambda tag: tag.question_set.all().count(), reverse = True)[:n_items]
 
+
+
+
+class ProfileManager(models.Manager):
+    def get_popular(self, n_items):
+
+        def sum_likes(profile):
+            sum = 0
+            for question in profile.question_set.all():
+                for like in question.likes.all(): #.filter(content_type = ContentType.objects.get_for_model(question)):
+                    sum  = sum + like.like
+            #print profile.user.username, sum
+            return sum
+
+        return sorted(Profile.objects.all(), key = sum_likes, reverse = True)[:n_items]
 
 
 
@@ -102,6 +120,8 @@ class Tag(models.Model):
     #relations
     #question = models.ManyToManyField(Question) #??
 
+    objects = TagManager()
+
     def __str__(self):
         return self.name
 
@@ -113,6 +133,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 
+    objects = ProfileManager()
 
     def __str__(self):
         return self.user.username

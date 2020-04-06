@@ -1,6 +1,11 @@
 from django.core.management.base import BaseCommand, CommandError
 from ask_n_answer.models import *
+from djangoProject.settings import STATICFILES_DIRS
 import random
+import os
+
+IMG_DIR = "/img/"
+IMG_DIR_FULL_PATH = STATICFILES_DIRS[0] + IMG_DIR
 
 
 class Command(BaseCommand):
@@ -42,13 +47,12 @@ class Command(BaseCommand):
                 a = Answer.objects.create(description = "My answer for your question #" + str(i),
                                           is_correct = True if (i == 0) else False,
                                           #rating = random.randint(-10, 10),
-                                          )
+                                          question = question,)
 
                 if (Profile.objects.all().count() > 0):
                     profile_ind = random.randint(0, Profile.objects.all().count() - 1)
-                    profile = Profile.objects.all()[profile_ind]
-                a.question = question
-                a.save()
+                    a.profile = Profile.objects.all()[profile_ind]
+                    a.save()
 
 
     def add_like(self, liked_object, profile):
@@ -84,7 +88,7 @@ class Command(BaseCommand):
             try:
                 p = Profile.objects.get(user = u)
             except Profile.DoesNotExist:
-                p = Profile.objects.create(avatar = "/avatar" + str(i), user = u)
+                p = Profile.objects.create(avatar = IMG_DIR + random.choice(os.listdir(IMG_DIR_FULL_PATH)), user = u)
 
             self.add_questions(p, count_questions, " from User " + str(i))
 
@@ -113,10 +117,8 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        print args
-        print options
         if options['delete']:
             self.delete_all()
             print 'Deleted!'
         else:
-            self.create_data(5, 5, 3)
+            self.create_data(options['users'], options['questions'], options['answers'])

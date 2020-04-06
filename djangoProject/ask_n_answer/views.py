@@ -4,19 +4,28 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.shortcuts import render_to_response  #optional
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 import random
 from django.core.urlresolvers import reverse
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
-from djangoProject.settings import PER_PAGE
+from djangoProject.settings import PER_PAGE, N_POPULAR_TAGS, N_POPULAR_USERS
+
 
 from ask_n_answer.models import *
 
+
+
+
+
 def get_right_bar():
     right_bar = dict.fromkeys(['tags', 'users'])
-    right_bar['tags'] = ['tag' + str(random.randint(0,10)) for i in range(8)]
-    right_bar['users'] = ['User ' + str(random.randint(0,10)) for i in range(5)]
+    right_bar['tags'] = Tag.objects.get_popular(N_POPULAR_TAGS)
+
+    right_bar['users'] = Profile.objects.get_popular(N_POPULAR_USERS)
+    #['User ' + str(random.randint(0,10)) for i in range(5)]
     return right_bar
+
+
 
 
 def paginate(objects_list, request):
@@ -40,8 +49,8 @@ def paginate(objects_list, request):
 
 
 
-def hello(request):
-    return HttpResponse(reverse('hello'))
+def not_found(request):
+    return HttpResponseNotFound('<h1>404 Page not found</h1>')
 
 
 
@@ -97,6 +106,9 @@ def question(request, id = None):
     tittle = "question: " + id
 
     question = Question.objects.pk_question(id)
+    if question == None:
+        return HttpResponseNotFound('<h1>404 Page not found</h1>')
+
     answer_list = Answer.objects.get_answers(question)
 
     return render_to_response('question.html', {

@@ -125,3 +125,7 @@ STATICFILES_DIRS = (BASE_DIR + "/../static",)
 
 # How much items should be at page
 PER_PAGE = 6
+
+# How much popular tags and users should be at the right bar
+N_POPULAR_TAGS = 8
+N_POPULAR_USERS = 5
