@@ -21,5 +21,5 @@ from django.core.urlresolvers import reverse
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^static/(?P<path>.*)$', views.serve),
-    url(r'^', include('blog.urls')),
+    url(r'^', include('ask_n_answer.urls')),
 ]
