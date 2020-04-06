@@ -1,0 +1,18 @@
+<div class = "container mb-4">
+  <h2>Best members </h2>
+
+  <ul class="list-group">
+    {% for user in right_bar.users %}
+      <li class="list-group-item"><a class = "text-dark" href = "#">{{ user }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class = "container mb-4">
+
+  <h2>Popular tags</h2>
+  {% for tag in right_bar.tags %}
+    <a href="{% url 'ask_n_answer.tag' tag %}"><span class="badge badge-success">{{ tag }}</span></a>
+  {% endfor %}
+
+</div>

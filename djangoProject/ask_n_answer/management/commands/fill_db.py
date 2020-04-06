@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from blog.models import *
+from ask_n_answer.models import *
 import random
 
 

@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'blog.apps.BlogConfig' ,
+    'ask_n_answer.apps.AskNAnswerConfig' ,
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,3 +122,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR + "/../static",)
+
+# How much items should be at page
+PER_PAGE = 6

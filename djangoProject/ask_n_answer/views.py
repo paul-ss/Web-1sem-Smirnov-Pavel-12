@@ -8,16 +8,23 @@ from django.http import HttpResponse
 import random
 from django.core.urlresolvers import reverse
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
+from djangoProject.settings import PER_PAGE
 
-from blog.models import *
+from ask_n_answer.models import *
+
+def get_right_bar():
+    right_bar = dict.fromkeys(['tags', 'users'])
+    right_bar['tags'] = ['tag' + str(random.randint(0,10)) for i in range(8)]
+    right_bar['users'] = ['User ' + str(random.randint(0,10)) for i in range(5)]
+    return right_bar
 
 
-def paginate(objects_list, request, per_page):
+def paginate(objects_list, request):
     page_number = request.GET.get('page')
     if (page_number == None):
         page_number = 1
 
-    paginator = Paginator(objects_list, per_page)
+    paginator = Paginator(objects_list, PER_PAGE)
     if (paginator.num_pages == 0):
         return None, None
 
@@ -43,12 +50,13 @@ def index(request):
     tittle = "index"
 
     question_list = Question.objects.new_questions()
-    question_list_current_page, page = paginate(question_list, request, 5)
+    question_list_current_page, page = paginate(question_list, request)
 
     return render_to_response('index.html', {
         'tittle': tittle,
         'question_box_list': question_list_current_page,
         'page': page,
+        'right_bar': get_right_bar(),
     })
 
 
@@ -58,12 +66,13 @@ def hot(request):
     tittle = 'hot'
 
     question_list = Question.objects.hot_questions()
-    question_list_current_page, page = paginate(question_list, request, 5)
+    question_list_current_page, page = paginate(question_list, request)
 
     return render_to_response('hot.html', {
         'tittle': tittle,
         'question_box_list': question_list_current_page,
         'page': page,
+        'right_bar': get_right_bar(),
     })
 
 
@@ -72,13 +81,14 @@ def tag(request, tag = None):
     tittle = "tag: " + tag
 
     question_list = Question.objects.tag_questions(tag)
-    question_list_current_page, page = paginate(question_list, request, 5)
+    question_list_current_page, page = paginate(question_list, request)
 
     return render_to_response('tag.html', {
         'tag' : tag,
         'tittle': tittle,
         'question_box_list': question_list_current_page,
         'page': page,
+        'right_bar': get_right_bar(),
     })
 
 
@@ -93,6 +103,7 @@ def question(request, id = None):
         'tittle': tittle,
         'answer_list' : answer_list,
         'question': question,
+        'right_bar': get_right_bar(),
     })
 
 
@@ -101,6 +112,7 @@ def login(request):
 
     return render_to_response('login.html', {
         'tittle': tittle,
+        'right_bar': get_right_bar(),
     })
 
 
@@ -109,6 +121,7 @@ def signup(request):
 
     return render_to_response('signup.html', {
         'tittle': tittle,
+        'right_bar': get_right_bar(),
     })
 
 
@@ -117,4 +130,5 @@ def ask(request):
 
     return render_to_response('ask.html', {
         'tittle': tittle,
+        'right_bar': get_right_bar(),
     })
