@@ -121,3 +121,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR + "/../static",)
+
+# How much items should be at page
+PER_PAGE = 6
