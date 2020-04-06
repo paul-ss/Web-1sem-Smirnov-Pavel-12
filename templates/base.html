@@ -22,7 +22,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
-    <a class="navbar-brand" href="{% url 'blog.index' %}">Smirnoff Ask</a>
+    <a class="navbar-brand" href="{% url 'ask_n_answer.index' %}">Smirnoff Ask</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse"  aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -60,8 +60,8 @@
 
     {% else %}
       <nav class="nav">
-        <a class="active pr-3 text-white" href="{% url 'blog.login' %}">Login</a>
-        <a class="active pr-3 text-white" href="{% url 'blog.signup' %}">Register</a>
+        <a class="active pr-3 text-white" href="{% url 'ask_n_answer.login' %}">Login</a>
+        <a class="active pr-3 text-white" href="{% url 'ask_n_answer.signup' %}">Register</a>
       </nav>
     {% endif %}
 

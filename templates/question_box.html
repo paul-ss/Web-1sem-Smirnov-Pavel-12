@@ -15,13 +15,13 @@
         </center>
       </div>
       <div class="col p-4 d-flex align-items-start flex-column position-static">
-        <a href = "{% url 'blog.question' question_box.id %}"><h3 class="mb-0">{{ question_box.question }}</h3></a>
+        <a href = "{% url 'ask_n_answer.question' question_box.id %}"><h3 class="mb-0">{{ question_box.question }}</h3></a>
         <p class="card-text mb-auto">{{ question_box.description }}</p>
         <div class = "mt-2">
-          <a href="{% url 'blog.question' question_box.id %}" class="link mr-4">Ansvers ({{ question_box.answers_count }})</a>
+          <a href="{% url 'ask_n_answer.question' question_box.id %}" class="link mr-4">Ansvers ({{ question_box.answers_count }})</a>
           <span class = "mr-2">Tags: </span>
           {% for tag in question_box.tags %}
-            <a href="{% url 'blog.tag' tag %}"><span class="badge badge-success">{{ tag }}</span></a>
+            <a href="{% url 'ask_n_answer.tag' tag %}"><span class="badge badge-success">{{ tag }}</span></a>
           {% endfor %}
         </div>
       </div>
