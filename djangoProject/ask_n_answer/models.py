@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.fields import GenericRelation
+from django.db.models import Count, Sum
 import pytz
 
 
@@ -51,23 +52,14 @@ class AnswerManager(models.Manager):
 
 class TagManager(models.Manager):
     def get_popular(self, n_items):
-        return sorted(Tag.objects.all(), key=lambda tag: tag.question_set.all().count(), reverse = True)[:n_items]
+        return self.annotate(num_questions=Count("question")).order_by("-num_questions")[:n_items]
 
 
 
 
 class ProfileManager(models.Manager):
     def get_popular(self, n_items):
-
-        def sum_likes(profile):
-            sum = 0
-            for question in profile.question_set.all():
-                for like in question.likes.all(): #.filter(content_type = ContentType.objects.get_for_model(question)):
-                    sum  = sum + like.like
-            #print profile.user.username, sum
-            return sum
-
-        return sorted(Profile.objects.all(), key = sum_likes, reverse = True)[:n_items]
+        return self.annotate(num_likes=Sum("question__likes__like")).order_by("-num_likes")[:n_items]
 
 
 
@@ -115,7 +107,7 @@ class Answer(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, unique = True)
 
     #relations
     #question = models.ManyToManyField(Question) #??
@@ -149,6 +141,10 @@ class Like(models.Model):
     content_type = models.ForeignKey(ContentType, null = True, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField(null = True)
     content_object = GenericForeignKey()
+
+    class Meta:
+        unique_together = ("profile", "content_type", "object_id")
+
 
     def __str__(self):
         return str(self.like)

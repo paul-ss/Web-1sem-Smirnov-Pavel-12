@@ -8,9 +8,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 import random
 from django.core.urlresolvers import reverse
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
-from djangoProject.settings import PER_PAGE, N_POPULAR_TAGS, N_POPULAR_USERS
-
-
+from djangoProject import settings
 from ask_n_answer.models import *
 
 
@@ -19,9 +17,9 @@ from ask_n_answer.models import *
 
 def get_right_bar():
     right_bar = dict.fromkeys(['tags', 'users'])
-    right_bar['tags'] = Tag.objects.get_popular(N_POPULAR_TAGS)
+    right_bar['tags'] = Tag.objects.get_popular(settings.N_POPULAR_TAGS)
 
-    right_bar['users'] = Profile.objects.get_popular(N_POPULAR_USERS)
+    right_bar['users'] = Profile.objects.get_popular(settings.N_POPULAR_USERS)
     #['User ' + str(random.randint(0,10)) for i in range(5)]
     return right_bar
 
@@ -33,7 +31,7 @@ def paginate(objects_list, request):
     if (page_number == None):
         page_number = 1
 
-    paginator = Paginator(objects_list, PER_PAGE)
+    paginator = Paginator(objects_list, settings.PER_PAGE)
     if (paginator.num_pages == 0):
         return None, None
 
